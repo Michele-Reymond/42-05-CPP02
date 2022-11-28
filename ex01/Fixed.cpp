@@ -15,6 +15,10 @@ Fixed::Fixed(const Fixed &base) {
 	*this = base;
 }
 
+// bit shift operation of 8
+// ex n = 10
+// 10 << 8 = 2560
+// this->_fix stock 2560
 Fixed::Fixed(const int n)
 {
 	std::cout << "Int constructor called" << std::endl;
@@ -24,6 +28,11 @@ Fixed::Fixed(const int n)
 // bit shift operation of 8
 // (1<<1) is 1*(2^1) is 2, (1<<8) is 1*(2^8) is 256
 // (1<<1) = 00000000 00000001 changes to 00000000 00000010
+// ex: f = 1234.43
+// 1234.43 * (1 << 8)
+// 1234.43 * 256 = 316014,08
+// arrondi à 316015
+// this->_fix stock 316015
 Fixed::Fixed(const float f)
 {
 	std::cout << "Float constructor called" << std::endl;
@@ -43,6 +52,10 @@ void Fixed::setRawBits(const int raw)
 	_fix = raw;
 }
 
+// récupérer le int stocké et le convertir en float
+// ex: 2560
+// 2560 / (1 << 8)
+// 2560 / 256 = 10
 float Fixed::toFloat( void ) const
 {
 	return (float)_fix / (1 << _rightBitsNum);
